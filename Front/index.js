@@ -1,3 +1,12 @@
-console.log('index.js connected');
+'use strict';
+window.onload = () => {
+    console.log("index.js loaded");
 
-//https://stackoverflow.com/questions/26108623/how-to-link-a-javascript-file-to-an-html-page-using-express-and-nodejs
+    async function fetchData() {
+
+        const resp = await fetch('http://localhost:3000');
+        const data = await resp.json();
+        console.log(data);
+    }
+    fetchData();
+};

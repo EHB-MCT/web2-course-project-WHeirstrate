@@ -6,6 +6,10 @@ const app = express();
 const router = express.Router();
 const port = 3000;
 
+//MIDDLEWARE
+const bodyparser = require('body-parser');
+const cors = require('cors');
+
 //DB
 const MongoClient = require('mongodb').MongoClient;
 const db_name = "Milestone2";
@@ -13,20 +17,30 @@ const uri = `mongodb+srv://admin:admin@cluster0.en9gr.mongodb.net/${db_name}?ret
 const client = new MongoClient(uri, {
     useNewUrlParser: true
 });
+
 //MIDDLEWARE
-const cors = require('cors');
+app.use(bodyparser.urlencoded({
+    extended: true
+}));
+app.use(bodyparser.json());
 app.use(cors());
 
+//REQUESTS
 app.get('/', (req, res) => {
-    res.send("//Load an 'about' page");
+    res.sendFile(`${__dirname}/root.html`);
 });
 
-app.get('/boardgames', (req, res) => {
-    //console.log(path.join(__dirname, '/boardgames.json'));
-    //fs.readFile(path.join(__dirname, '/boardgames.json'), err => {
-    //    console.log('Error: ', err);
-    //});
-});
+app.use('/api', router);
+
+router.route('/routes')
+    //display data on this route
+    .get()
+    //what to do when user adds object
+    .post()
+    //update the object with what the user inputs
+    .put()
+
+    .patch();
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
@@ -35,6 +49,6 @@ app.listen(port, () => {
             throw err;
         }
         db = client.db(db_name);
-        console.log("connected to database", db_name);
+        console.log(`\n-- SERVER -- Connected to database ${db_name}!`);
     });
 });

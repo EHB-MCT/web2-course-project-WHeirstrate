@@ -1,14 +1,10 @@
-let db;
+let db, collection;
 
 //EXPRESS
 const express = require('express');
 const app = express();
 const router = express.Router();
 const port = 3000;
-
-//MIDDLEWARE
-const bodyparser = require('body-parser');
-const cors = require('cors');
 
 //DB
 const MongoClient = require('mongodb').MongoClient;
@@ -19,6 +15,8 @@ const client = new MongoClient(uri, {
 });
 
 //MIDDLEWARE
+const cors = require('cors');
+const bodyparser = require('body-parser');
 app.use(bodyparser.urlencoded({
     extended: true
 }));
@@ -34,13 +32,25 @@ app.use('/api', router);
 
 router.route('/routes')
     //display data on this route
-    .get()
+    .get((req, res) => {
+        collection = db.collection('routes');
+        collection.find({}).toArray((err, result) => {
+            if (err)
+                return res.status(500).send(err);
+            res.json(result);
+        });
+    })
     //what to do when user adds object
-    .post()
+    .post((req, res) => {
+        collection = db.collection('routes');
+        console.log(req.body);
+        return console.log('POSTED');
+        //collection.insertOne(bodyparser.json(req.body));
+    })
     //update the object with what the user inputs
-    .put()
+    .put((req, res) => {})
 
-    .patch();
+    .patch((req, res) => {});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

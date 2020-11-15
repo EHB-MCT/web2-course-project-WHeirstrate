@@ -44,8 +44,12 @@ router.route('/routes')
     .post((req, res) => {
         collection = db.collection('routes');
         console.log(req.body);
-        return console.log('POSTED');
-        //collection.insertOne(bodyparser.json(req.body));
+        if (req.body) {
+            collection.insertOne(req.body);
+            console.log("LOG Route has been saved!");
+        } else {
+            console.log("Body was empty");
+        }
     })
     //update the object with what the user inputs
     .put((req, res) => {})

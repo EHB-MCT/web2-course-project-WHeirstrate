@@ -66,18 +66,18 @@ window.onload = () => {
         const arrivalInput = document.getElementById('arrivalInput');
 
         if (departureInput.value != "") {
-            if (arrivalInput.value != "") console.log("..."); //submitForm();
+            if (arrivalInput.value != "") submitForm();
             else arrivalInput.focus();
         } else departureInput.focus();
     }
 
-    /*async function submitForm() {
-        const departureInput = document.getElementById('departureInput').value;
-        const arrivalInput = document.getElementById('arrivalInput').value;
+    async function submitForm() {
+        const departureInputValue = document.getElementById('departureInput').value;
+        const arrivalInputValue = document.getElementById('arrivalInput').value;
 
         const userInput = {
-            departure: `${departureInput}`,
-            destination: `${arrivalInput}`,
+            departure: `${departureInputValue}`,
+            destination: `${arrivalInputValue}`,
             stops: [
                 "To be determined by external API",
                 "This function is not implemented yet",
@@ -85,16 +85,15 @@ window.onload = () => {
             ],
             distance_km: Math.floor(Math.random() * 55)
         };
+        console.log(userInput);
 
-        const response = await fetch('http://localhost:3000/api/routes', {
+        await fetch('http://localhost:3000/api/routes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(userInput)
+            body: JSON.stringify(userInput),
         });
-        const data = await response.json();
-        console.log(data);
+        fetchAndLoadData();
     }
-    */
 };

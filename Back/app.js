@@ -43,13 +43,13 @@ router.route('/routes')
     //what to do when user adds object
     .post((req, res) => {
         collection = db.collection('routes');
-        console.log(req.body);
-        if (req.body) {
-            collection.insertOne(req.body);
-            console.log("LOG Route has been saved!");
-        } else {
-            console.log("Body was empty");
-        }
+        console.log(req.body.departure);
+        /*collection.insertOne(req.body).then((err, result) => {
+            if (err)
+                return err;
+            else
+                return result;
+        });*/
     })
     //update the object with what the user inputs
     .put((req, res) => {})

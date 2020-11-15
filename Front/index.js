@@ -23,16 +23,16 @@ window.onload = () => {
             for (let stop of route.stops) {
                 htmlStopsString += `<li>${stop}</li>`;
             }
-            htmlDbString += `
+            htmlDbString = `
                 <div class="route">
                     <h2>Van ${route.departure} naar ${route.destination}</h2>
-                    <p>Vertrek om: 88u88</p>
-                    <p>Totale afstand: ${route.distance_km}
+                    <p>Vertrek om ${route.departure_time}.</p>
+                    <p>De totale afstand is ${route.distance_km}km.</p>
                     <p>Via</p>
                     <ul class="stops">
                         ${htmlStopsString}
                     </ul>
-                </div>`;
+                </div>` + htmlDbString;
         }
         // console.log(htmlDbString);
         innerBodyHTML.innerHTML = htmlDbString;
@@ -53,10 +53,10 @@ window.onload = () => {
                 <button type="submit">Voeg route toe!</button>
             </form>`;
         innerBodyHTML.innerHTML = htmlFormString;
-        addEventListenerForm();
+        eventListenerForm();
     }
 
-    function addEventListenerForm() {
+    function eventListenerForm() {
         document.getElementById('form').addEventListener('submit', checkForm);
     }
 
@@ -77,6 +77,7 @@ window.onload = () => {
 
         const userInput = {
             departure: `${departureInputValue}`,
+            departure_time: `${Math.floor(Math.random() * 24)}u${Math.floor(Math.random() * 59)}`,
             destination: `${arrivalInputValue}`,
             stops: [
                 "To be determined by external API",
@@ -94,6 +95,6 @@ window.onload = () => {
             },
             body: JSON.stringify(userInput),
         });
-        fetchAndLoadData();
+        setTimeout(fetchAndLoadData, 500);
     }
 };

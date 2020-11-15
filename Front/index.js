@@ -11,6 +11,7 @@ window.onload = () => {
         e.preventDefault();
         if (e.target.innerText == "Home") fetchAndLoadData();
         if (e.target.innerText == "Form") loadForm();
+        if (e.target.innerText == "Api Root") window.location.replace('http://localhost:3000/');
     }
 
     async function fetchAndLoadData() {
@@ -34,7 +35,6 @@ window.onload = () => {
                     </ul>
                 </div>` + htmlDbString;
         }
-        // console.log(htmlDbString);
         innerBodyHTML.innerHTML = htmlDbString;
     }
 

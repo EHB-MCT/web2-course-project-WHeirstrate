@@ -8,6 +8,7 @@ const port = 3000;
 
 //DB
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require("mongodb").ObjectID;
 const db_name = "Milestone2";
 const uri = `mongodb+srv://admin:admin@cluster0.en9gr.mongodb.net/${db_name}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
@@ -43,18 +44,27 @@ router.route('/routes')
     //what to do when user adds object
     .post((req, res) => {
         collection = db.collection('routes');
-        console.log(req.body.departure);
-        /*collection.insertOne(req.body).then((err, result) => {
+        collection.insertOne(req.body).then((err, result) => {
             if (err)
-                return err;
-            else
-                return result;
-        });*/
+                return res.status(500).send(err);
+            return res.send(result);
+        });
     })
     //update the object with what the user inputs
     .put((req, res) => {})
 
     .patch((req, res) => {});
+
+router.route('/routes/:id')
+    .get((req, res) => {
+        collection.findOne({
+            '_id': new ObjectId(req.params.id)
+        }, (err, result) => {
+            if (err)
+                return res.status(500).send(err);
+            return res.send(result);
+        });
+    });
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

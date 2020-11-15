@@ -9,8 +9,8 @@ window.onload = () => {
 
     function changePath(e) {
         e.preventDefault();
-        if (event.target.innerText == "Home") fetchAndLoadData();
-        if (event.target.innerText == "Form") loadForm();
+        if (e.target.innerText == "Home") fetchAndLoadData();
+        if (e.target.innerText == "Form") loadForm();
     }
 
     async function fetchAndLoadData() {

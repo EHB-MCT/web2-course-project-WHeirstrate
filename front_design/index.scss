@@ -4,6 +4,7 @@ sans-serif;
 $font-title: "Segui UI";
 $main-color-green: #3CC201;
 $main-color-grey: #E9E9E9;
+$main-box-shadow: 0 3 6 rgba(0, 0, 0, 0.16);
 
 * {
     margin: 0;
@@ -30,7 +31,7 @@ $main-color-grey: #E9E9E9;
             height: 50px;
             border-radius: 10px;
             border: none;
-            box-shadow: 0 3 6 rgba(0, 0, 0, 0.16);
+            box-shadow: $main-box-shadow;
             text-align: center;
         }
     }

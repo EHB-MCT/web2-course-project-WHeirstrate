@@ -11,12 +11,12 @@ window.onload = () => {
         e.preventDefault();
         if (e.target.innerText == "Home") fetchAndLoadData();
         if (e.target.innerText == "Form") loadForm();
-        if (e.target.innerText == "Api Root") window.location.replace('http://localhost:3000/');
+        if (e.target.innerText == "Api Root") window.location.replace('https://web2-project-back-wheirstrate.herokuapp.com/');
     }
 
     async function fetchAndLoadData() {
         let htmlDbString = "";
-        const resp = await fetch('http://localhost:3000/api/routes');
+        const resp = await fetch('https://web2-project-back-wheirstrate.herokuapp.com/api/routes');
         const data = await resp.json();
 
         for (let route of data) {
@@ -88,7 +88,7 @@ window.onload = () => {
         };
         console.log(userInput);
 
-        await fetch('http://localhost:3000/api/routes', {
+        await fetch('https://web2-project-back-wheirstrate.herokuapp.com/api/routes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

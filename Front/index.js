@@ -97,4 +97,5 @@ window.onload = () => {
         });
         setTimeout(fetchAndLoadData, 500);
     }
+
 };

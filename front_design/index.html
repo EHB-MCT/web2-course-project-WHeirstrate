@@ -9,19 +9,36 @@
 </head>
 
 <body>
-    <div class="innerBody">
-        <div class="navigation">
-            Hier is een form
-            Hallo
+    <div class="navigation_container">
+        <div class="navigation_content">
+            <img src="./images/Logo_Trailway_SVG.svg" alt="Logo Trailway">
             <form id="form">
-                <input type="text" id="departureInput">
-                <input type="text" id="arrivalInput">
-                <button type="submit">Go! Go! Go!</button>
+                <input type="text" id="departureInput" class="locations" placeholder="Vertrekstation">
+                <input type="text" id="arrivalInput" class="locations" placeholder="Aankomststation"><br>
+                <div class="interests">
+                    <p class="interessesText">Wat zijn jouw interesses?</p>
+                    <hr class="line">
+                    <div class="checkboxes"><input type="checkbox" value="tourismebureaus" id="interest1">
+                        <label for="interest1">Tourismebureaus</label><br>
+                        <input type="checkbox" value="tourismebureaus" id="interest2">
+                        <label for="interest2">Hotels</label><br>
+                        <input type="checkbox" value="tourismebureaus" id="interest3">
+                        <label for="interest3">Cafés</label><br>
+                        <input type="checkbox" value="tourismebureaus" id="interest4">
+                        <label for="interest4">Musea</label>
+                    </div>
+                </div>
+                <button type="submit" id="submitForm" class="submit">Go! Go! Go!</button>
             </form>
         </div>
-        <div class="content"></div>
     </div>
 
+    <div id="content" class="content">
+        <h1 class="title_quote">Het gaat niet om de bestemming, maar om de reis ernaartoe. Boeddha</h1>
+        <p class="title_exp">Welkom, blij dat je er bent! Bij Trailway ben je aan het goede adres als je de steden wil
+            verkennen waar je trein halt houdt. Geef je vertrekstation, aankomststation en interesses in en wij doen de
+            rest voor jou, zo simpel is het.</p>
+    </div>
 </body>
 
 </html>

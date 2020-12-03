@@ -1,39 +1,182 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Poppins", "Arial", sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
-.innerBody {
+/*----------------------------------//
+ Vanaf hier begint de algemene css,
+ die op elk moment hetzelfde is.
+ De dynamische css wordt onderaan
+ deze pagina ingeladen.
+//----------------------------------*/
+body {
   width: 100vw;
   height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (8.33333vw)[12];
+      grid-template-columns: repeat(12, 8.33333vw);
 }
 
-.navigation {
-  position: fixed;
-  background-color: #3CC201;
-  width: 25vw;
-  height: 100vh;
+.navigation_container {
+  background-color: #00BAEA;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-column: 1 / span 3;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 5;
+  grid-row: 1 / span 5;
 }
 
-.navigation form {
+.navigation_content {
+  margin: 11px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #F1F1F1;
+  border-radius: 20px;
   text-align: center;
 }
 
-.navigation form input {
-  width: 85%;
-  height: 50px;
+.navigation_content img {
+  width: 80%;
+  margin: 30px 0 40px;
+}
+
+.navigation_content form .locations {
+  width: 76%;
+  height: 45px;
+  background-color: #FFF;
+  -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+          box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+  border: 1px solid #00BAEA;
   border-radius: 10px;
-  border: none;
-  -webkit-box-shadow: 0 3 6 rgba(0, 0, 0, 0.16);
-          box-shadow: 0 3 6 rgba(0, 0, 0, 0.16);
-  text-align: center;
+  text-indent: 22%;
+  font-size: 18px;
+  margin-bottom: 3.1vh;
+  outline-color: #00BAEA;
+}
+
+.navigation_content form #departureInput::before {
+  content: "";
+  display: block;
+  background: url("./images/Treintje_vertrek_SVG.svg") 30px 35px no-repeat;
+  color: red;
+}
+
+.navigation_content form #arrivalInput::before {
+  content: "";
+  display: block;
+  background: url("./images/Treintje_aankomst_SVG.svg") no-repeat;
+  width: 35px;
+  height: 20px;
+}
+
+.navigation_content form .locations::-webkit-input-placeholder {
+  color: #7D7D7D;
+}
+
+.navigation_content form .locations:-ms-input-placeholder {
+  color: #7D7D7D;
+}
+
+.navigation_content form .locations::-ms-input-placeholder {
+  color: #7D7D7D;
+}
+
+.navigation_content form .locations::placeholder {
+  color: #7D7D7D;
+}
+
+.navigation_content form .interests {
+  background-color: white;
+  width: 76%;
+  -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+          box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+  border: 1px solid #00BAEA;
+  border-radius: 10px;
+  padding: 12px 0 7px;
+  margin: 3.1vh auto 2.2vh;
+}
+
+.navigation_content form .interests .checkboxes {
+  text-align: left;
+  margin-left: 30px;
+}
+
+.navigation_content form .interests .checkboxes input {
+  margin: 13px 0;
+  outline-color: #00BAEA;
+}
+
+.navigation_content form .interests .checkboxes label {
+  margin-left: 10px;
+}
+
+.navigation_content form .interests .line {
+  margin: 11px auto 7px;
+  border: .1px solid #70707050;
+  width: 76%;
+}
+
+.navigation_content form .submit {
+  width: 76%;
+  height: 45px;
+  background-color: #FFF;
+  -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+          box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+  border: 1px solid #00BAEA;
+  border-radius: 10px;
+  font-size: 18px;
+  margin: 30px auto 20px;
+  outline-color: #00BAEA;
 }
 
 .content {
-  background-color: #E9E9E9;
-  margin-left: 25vw;
-  width: 75;
+  -ms-grid-column: 4;
+      grid-column-start: 4;
+  grid-column-end: 12;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (11.11111%)[9];
+      grid-template-columns: repeat(9, 11.11111%);
+  -ms-grid-rows: (20vh)[5];
+      grid-template-rows: repeat(5, 20vh);
+  left: 380px;
+  background-image: url("./images/Achtergrond_trein.jpg");
+  background-repeat: no-repeat;
+  background-size: 1250px;
+  width: 75vw;
   height: 100vh;
+}
+
+/*----------------------------------//
+ Vanaf hier begint de dynamische css,
+ die op elk moment verschillend is.
+ De algement css wordt bovenaan
+ deze pagina ingeladen.
+//----------------------------------*/
+.content .title_quote {
+  color: white;
+  text-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 5;
+  grid-column: 3 / 8;
+  -ms-grid-row: 2;
+  grid-row: 2;
+  text-align: center;
+}
+
+.content .title_exp {
+  color: white;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 5;
+  grid-column: 3 / 8;
+  font-weight: bold;
+  -ms-grid-row: 5;
+  grid-row: 5;
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.16);
+  background-color: rgba(0, 0, 0, 0.185);
+  height: 80px;
 }
 /*# sourceMappingURL=index.css.map */

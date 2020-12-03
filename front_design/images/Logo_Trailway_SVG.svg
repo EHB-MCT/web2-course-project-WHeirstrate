@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 217.06" style="enable-background:new 0 0 500 217.06;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#00BAEA;}
+	.st1{fill:#2DB2D3;}
+	.st2{fill:#2DB2D3;stroke:#2DB2D3;stroke-width:4;stroke-miterlimit:10;}
+	.st3{fill:#2DB2D3;stroke:#2DB2D3;stroke-width:3;stroke-miterlimit:10;}
+	.st4{fill:#2DB2D3;stroke:#2DB2D3;stroke-miterlimit:10;}
+</style>
+<g id="ARTBOARD2">
+	<g id="Upperscuares">
+		<rect y="-0.15" class="st0" width="51.68" height="35.23"/>
+		<rect x="57.63" y="-0.15" class="st0" width="24.01" height="37.02"/>
+		<rect x="191.43" y="0.02" class="st0" width="24" height="35.4"/>
+		<rect x="225.13" y="0.02" class="st0" width="24" height="36.09"/>
+		<rect x="277.37" y="0.02" class="st0" width="24" height="36.09"/>
+		<rect x="314.54" y="0.06" class="st0" width="21.73" height="37.06"/>
+		<rect x="349.72" y="0.12" class="st0" width="23.31" height="34.45"/>
+		<rect x="441.46" y="0.12" class="st0" width="23.83" height="34.45"/>
+		<rect x="478.4" y="0.12" class="st0" width="21.6" height="34.96"/>
+		<rect x="133.23" y="0.02" class="st0" width="41" height="35.74"/>
+		<rect x="386.32" y="0.02" class="st0" width="41.48" height="35.57"/>
+	</g>
+	<g id="Undersquares">
+		<rect x="12.7" y="190.83" class="st0" width="24" height="26.21"/>
+		<rect x="57.63" y="191.09" class="st0" width="24.01" height="26"/>
+		<rect x="91.34" y="189.98" class="st0" width="24" height="27.11"/>
+		<rect x="191.26" y="191.34" class="st0" width="24" height="25.72"/>
+		<rect x="224.96" y="190.15" class="st0" width="48.68" height="26.91"/>
+		<rect x="289.81" y="189.81" class="st0" width="29.45" height="27.26"/>
+		<rect x="330.66" y="191.34" class="st0" width="29.45" height="25.72"/>
+		<rect x="460.53" y="190.15" class="st0" width="22.81" height="26.91"/>
+		<rect x="121.41" y="189.64" class="st0" width="23.11" height="27.45"/>
+		<rect x="162.68" y="189.81" class="st0" width="23.11" height="27.26"/>
+		<rect x="375" y="191.17" class="st0" width="23.11" height="25.89"/>
+		<rect x="415.28" y="189.98" class="st0" width="23.11" height="27.09"/>
+	</g>
+	<g id="Text">
+		<g>
+			<path class="st0" d="M12.81,173.52V76.04H0V52.86h51.3v23.18H36.97v97.48H12.81z"/>
+			<path class="st0" d="M58.04,52.86h37.08c5.9,0,10.46,1.33,13.7,4c3.23,2.67,5.41,6.42,6.53,11.24
+				c1.12,4.82,1.69,10.98,1.69,18.47c0,6.84-0.89,12.17-2.67,16.01c-1.78,3.84-4.87,6.51-9.27,8.01c3.65,0.75,6.3,2.58,7.94,5.48
+				c1.64,2.9,2.46,6.84,2.46,11.8l-0.28,45.65h-23.6v-47.2c0-3.37-0.66-5.52-1.97-6.46c-1.31-0.94-3.7-1.4-7.16-1.4v55.06H58.04
+				V52.86z M88.38,97.53c3.37,0,5.06-3.65,5.06-10.96c0-3.18-0.14-5.57-0.42-7.16c-0.28-1.59-0.8-2.69-1.54-3.3
+				c-0.75-0.61-1.83-0.91-3.23-0.91h-5.62v22.33H88.38z"/>
+			<path class="st0" d="M121.81,173.52l11.66-120.66h40.88l11.52,120.66h-22.9l-1.69-19.52h-14.61l-1.41,19.52H121.81z
+				 M148.5,134.75h10.96l-5.34-61.38h-1.12L148.5,134.75z"/>
+			<path class="st0" d="M192.04,173.52V52.86h23.32v120.66H192.04z"/>
+			<path class="st0" d="M225.05,173.52V52.86h24.16v100.15h24.86v20.51H225.05z"/>
+			<path class="st0" d="M290.22,173.52L277.3,52.86h23.6l6.74,76.13l6.74-76.13h22.47l6.46,76.13l6.46-76.13h23.88l-13.2,120.66
+				h-28.94l-6.04-58.15l-5.76,58.15H290.22z"/>
+			<path class="st0" d="M374.64,173.52L386.3,52.86h40.88l11.52,120.66h-22.9l-1.69-19.52H399.5l-1.41,19.52H374.64z M401.33,134.75
+				h10.96l-5.34-61.38h-1.12L401.33,134.75z"/>
+			<path class="st0" d="M460.6,173.52v-39.75l-19.24-80.91h23.88l6.74,40.88l6.74-40.88H500l0,10.93l-16.64,69.98v39.75H460.6z"/>
+		</g>
+	</g>
+	<g id="Underlines">
+		<rect x="0" y="173.24" class="st0" width="500" height="6.61"/>
+		<rect x="0" y="187.53" class="st0" width="500" height="7.14"/>
+	</g>
+	<g id="Upperlines">
+		<rect y="32.23" class="st0" width="500" height="6.87"/>
+		<rect y="46.73" class="st0" width="500" height="6.95"/>
+	</g>
+</g>
+<g id="ARTBOARD1">
+</g>
+</svg>

@@ -1,10 +1,11 @@
 $font-to-use: "Poppins",
-"Arial",
+Arial,
 sans-serif;
 $font-title: "Segui UI";
-$main-color-green: #3CC201;
-$main-color-grey: #E9E9E9;
-$main-box-shadow: 0 3 6 rgba(0, 0, 0, 0.16);
+$main-color-blue: #00BAEA;
+$main-color-grey: #F1F1F1;
+$main-box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+
 
 * {
     margin: 0;
@@ -12,34 +13,157 @@ $main-box-shadow: 0 3 6 rgba(0, 0, 0, 0.16);
     font-family: $font-to-use;
 }
 
-.innerBody {
+/*----------------------------------//
+ Vanaf hier begint de algemene css,
+ die op elk moment hetzelfde is.
+ De dynamische css wordt onderaan
+ deze pagina ingeladen.
+//----------------------------------*/
+
+body {
     width: 100vw;
+    //min-width: 1160px;
     height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(12, (100vw/12));
 }
 
-.navigation {
-    position: fixed;
-    background-color: $main-color-green;
-    width: 25vw;
-    height: 100vh;
+//--------MENU---------\\
+
+.navigation_container {
+    background-color: $main-color-blue;
+    grid-column: 1 / span 3;
+    grid-row: 1 / span 5;
+}
+
+.navigation_content {
+    margin: 11px;
+    box-sizing: border-box;
+    background-color: $main-color-grey;
+    border-radius: 20px;
+    text-align: center;
+
+    img {
+        width: 80%;
+        margin: 30px 0 40px;
+    }
 
     form {
-        text-align: center;
-
-        input {
-            width: 85%;
-            height: 50px;
-            border-radius: 10px;
-            border: none;
+        .locations {
+            width: 76%;
+            height: 45px;
+            background-color: #FFF;
             box-shadow: $main-box-shadow;
-            text-align: center;
+            border: 1px solid $main-color-blue;
+            border-radius: 10px;
+            text-indent: 22%;
+            font-size: 18px;
+            margin-bottom: 3.1vh;
+            outline-color: $main-color-blue;
+        }
+
+        #departureInput::before {
+            content: "";
+            display: block;
+            background: url('./images/Treintje_vertrek_SVG.svg') 30px 35px no-repeat;
+            color: red;
+
+        }
+
+        #arrivalInput::before {
+            content: "";
+            display: block;
+            background: url('./images/Treintje_aankomst_SVG.svg') no-repeat;
+            width: 35px;
+            height: 20px;
+        }
+
+        .locations::placeholder {
+            color: #7D7D7D;
+        }
+
+        .interests {
+            background-color: white;
+            width: 76%;
+            box-shadow: $main-box-shadow;
+            border: 1px solid $main-color-blue;
+            border-radius: 10px;
+            padding: 12px 0 7px;
+            margin: 3.1vh auto 2.2vh;
+
+            .checkboxes {
+                text-align: left;
+                margin-left: 30px;
+
+                input {
+                    margin: 13px 0;
+                    outline-color: $main-color-blue;
+                }
+
+                label {
+                    margin-left: 10px;
+                }
+            }
+
+            .line {
+                margin: 11px auto 7px;
+                border: .1px solid #70707050;
+                width: 76%;
+            }
+        }
+
+        .submit {
+            width: 76%;
+            height: 45px;
+            background-color: #FFF;
+            box-shadow: $main-box-shadow;
+            border: 1px solid $main-color-blue;
+            border-radius: 10px;
+            font-size: 18px;
+            margin: 30px auto 20px;
+            outline-color: $main-color-blue;
         }
     }
 }
 
+//--------content---------\\
+
 .content {
-    background-color: $main-color-grey;
-    margin-left: 25vw;
-    width: 75;
+    grid-column-start: 4;
+    grid-column-end: 12;
+    display: grid;
+    grid-template-columns: repeat(9, (100%/9));
+    grid-template-rows: repeat(5, (100vh/5));
+    left: 380px;
+    background-image: url('./images/Achtergrond_trein.jpg');
+    background-repeat: no-repeat;
+    background-size: 1250px;
+    width: 75vw;
     height: 100vh;
+}
+
+/*----------------------------------//
+ Vanaf hier begint de dynamische css,
+ die op elk moment verschillend is.
+ De algement css wordt bovenaan
+ deze pagina ingeladen.
+//----------------------------------*/
+.content {
+    .title_quote {
+        color: white;
+        text-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+        grid-column: 3 / 8;
+        grid-row: 2;
+        text-align: center;
+    }
+
+    .title_exp {
+        color: rgb(255, 255, 255);
+        grid-column: 3 / 8;
+        font-weight: bold;
+        grid-row: 5;
+        text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.16);
+        background-color: rgba(0, 0, 0, 0.185);
+        height: 80px;
+    }
 }

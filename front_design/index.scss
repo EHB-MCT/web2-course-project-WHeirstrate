@@ -17,7 +17,7 @@ $main-box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
  Vanaf hier begint de algemene css,
  die op elk moment hetzelfde is.
  De dynamische css wordt onderaan
- deze pagina ingeladen.
+ deze pagina beschreven.
 //----------------------------------*/
 
 body {
@@ -62,16 +62,18 @@ body {
             outline-color: $main-color-blue;
         }
 
-        #departureInput::before {
-            content: "";
-            display: block;
-            background: url('./images/Treintje_vertrek_SVG.svg') 30px 35px no-repeat;
-            color: red;
-
+        .locations:first-child:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: red;
         }
 
-        #arrivalInput::before {
-            content: "";
+        #arrivalInput:before {
+            content: '';
             display: block;
             background: url('./images/Treintje_aankomst_SVG.svg') no-repeat;
             width: 35px;
@@ -142,13 +144,34 @@ body {
     height: 100vh;
 }
 
+.profile_container_link {
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 15px;
+    border: $main-color-blue solid 3px;
+    background-color: $main-color-grey;
+}
+
 /*----------------------------------//
  Vanaf hier begint de dynamische css,
  die op elk moment verschillend is.
- De algement css wordt bovenaan
- deze pagina ingeladen.
+ De algemene css wordt bovenaan
+ deze pagina beschreven.
 //----------------------------------*/
+
+
 .content {
+
+
+    // HOMEPAGE //
+
+
     .title_quote {
         color: white;
         text-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
@@ -159,11 +182,206 @@ body {
 
     .title_exp {
         color: rgb(255, 255, 255);
+        text-align: center;
         grid-column: 3 / 8;
         font-weight: bold;
         grid-row: 5;
         text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.16);
         background-color: rgba(0, 0, 0, 0.185);
-        height: 80px;
+        height: fit-content;
+        padding: 7px;
+    }
+
+
+    // LOADING //
+
+
+    .animation_container {
+        grid-column: 4 / 6;
+        grid-row: 3;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .animation_container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: url(./images/Treintje_animatie_SVG.svg) no-repeat;
+        z-index: -1;
+        animation: 2s moving-background linear infinite;
+    }
+
+    @keyframes moving-background {
+        0% {
+            transform: translateX(-100%);
+        }
+
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+
+    // STOPS
+
+
+    .stops_container {
+        box-sizing: border-box;
+        grid-row: 1/ span 5;
+        grid-column: 1 / span 9;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+
+        .stop_container {
+            width: 260px;
+            height: 210px;
+            margin: 14px;
+            background-color: $main-color-grey;
+            border-radius: 15px;
+            box-shadow: $main-box-shadow;
+            overflow: hidden;
+
+            img {
+                height: 70%;
+                width: 90%;
+                overflow: hidden;
+                overflow: hidden;
+                margin: 10px 0 0 5%;
+                border-radius: 15px;
+            }
+
+            p {
+                margin-top: -5px;
+                font-size: 12px;
+                text-align: center;
+                margin-right: 5%;
+            }
+
+            h3 {
+                margin-top: -2px;
+                text-align: center;
+            }
+        }
+    }
+
+
+    // PROFILE
+
+    .profile_container {
+        grid-row: 2 / span 3;
+        grid-column: 2 / span 7;
+        background-color: $main-color-grey;
+        border-radius: 15px;
+        display: grid;
+
+
+        // PROFILE LOGIN
+
+        .inleidingsTekst {
+            padding-top: 30px;
+            padding-bottom: 15px;
+            font-size: 18px;
+            margin: auto;
+        }
+
+        .profileLoginForm {
+            margin: 0 auto;
+
+            input {
+                width: 100%;
+                height: 45px;
+                background-color: #FFF;
+                box-shadow: $main-box-shadow;
+                border: 1px solid $main-color-blue;
+                border-radius: 10px;
+                text-indent: 30px;
+                font-size: 18px;
+                margin-bottom: 3.1vh;
+                outline-color: $main-color-blue;
+            }
+
+            button {
+                width: 50%;
+                height: 45px;
+                background-color: #FFF;
+                box-shadow: $main-box-shadow;
+                border: 1px solid $main-color-blue;
+                border-radius: 10px;
+                font-size: 18px;
+                margin: 40px 0 0 25%;
+                outline-color: $main-color-blue;
+            }
+        }
+
+        // PROFILE CONTENT
+
+        .usernameDisplay {
+            margin: 30px 0 -20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .emailDisplay {
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .scroll_container {
+            height: 150px;
+            overflow-y: hidden;
+            width: 95%;
+            text-align: center;
+            margin: 0 auto;
+
+            .content_title {
+                height: 7px;
+                width: 80%;
+                margin-left: 10%;
+                margin-bottom: 30px;
+                padding-bottom: 5px;
+                border-bottom: 1px solid $main-color-blue;
+
+                span {
+                    background-color: $main-color-grey;
+                    padding: 0 14px;
+                }
+            }
+
+            .inner_box {
+                display: flex;
+                width: 100%;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-behavior: smooth;
+
+                .route_names,
+                .city_names {
+                    background: white;
+                    box-shadow: $main-box-shadow;
+                    border-radius: 15px;
+                    min-width: 140px;
+                    margin: 3px;
+                    height: 70px;
+                    padding: 13px;
+                    color: black;
+
+                    .city_names_content {
+                        margin-top: 22px;
+                    }
+
+                    .arrow_icon {
+                        width: 32px;
+                        margin-bottom: -10px;
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 109.7 22" style="enable-background:new 0 0 109.7 22;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#707070;}
+	.st1{fill:#FFFFFF;stroke:#000000;}
+	.st2{fill:#00BAEA;}
+	.st3{fill:none;}
+	.st4{fill:none;stroke:#000000;}
+</style>
+<g id="Group_106" transform="translate(55)">
+	<line id="connector" class="st0" x1="-3.5" y1="16" x2="0.5" y2="16"/>
+	<g id="Car2">
+		<g id="wheels_car_2">
+			<path id="Path_15" class="st1" d="M-52.4,17c-0.1-2.3,1.7-4.4,4-4.5c2.3,0.1,4.1,2.2,4,4.5c0.1,2.3-1.7,4.4-4,4.5
+				C-50.8,21.4-52.6,19.4-52.4,17"/>
+			<g id="Ellipse_7_1_" transform="translate(-2503 1533)">
+				<ellipse id="Ellipse_9" class="st1" cx="2463.6" cy="-1516" rx="4" ry="4.5"/>
+			</g>
+			<g id="Ellipse_6_1_" transform="translate(-2494 1533)">
+				<circle id="Ellipse_10" class="st1" cx="2464.1" cy="-1516" r="4.5"/>
+			</g>
+			<g id="Ellipse_8_1_" transform="translate(-2484 1533)">
+				<circle id="Ellipse_11" class="st1" cx="2464.1" cy="-1516" r="4.5"/>
+			</g>
+			<g id="Ellipse_5_1_" transform="translate(-2474 1533)">
+				<ellipse id="Ellipse_12" class="st1" cx="2463.6" cy="-1516" rx="4" ry="4.5"/>
+			</g>
+		</g>
+		<g id="Color_car_2">
+			<rect x="-54.4" y="0.6" class="st2" width="5" height="17.8"/>
+			<rect x="-50.2" y="0.7" class="st2" width="42.5" height="4.3"/>
+			<rect x="-50.3" y="12" class="st2" width="42.5" height="6.2"/>
+			<rect x="-40.9" y="1" class="st2" width="2.1" height="17"/>
+			<rect x="-30.1" y="1" class="st2" width="2.1" height="17"/>
+			<rect x="-19" y="1" class="st2" width="2.1" height="17"/>
+			<rect x="-7.9" y="0.6" class="st2" width="3.9" height="17.7"/>
+		</g>
+		<g id="Windows_car_2">
+			<g id="Rectangle_35_1_2" transform="translate(-2498 1526)">
+				<rect id="Rectangle_69-2" x="2459.6" y="-1520.5" class="st0" width="8" height="6"/>
+			</g>
+			<g id="Rectangle_35_1_3" transform="translate(-2476 1526)">
+				<rect id="Rectangle_69-3" x="2459.6" y="-1520.5" class="st0" width="8" height="6"/>
+			</g>
+			<g id="Rectangle_36_1_2" transform="translate(-2509 1526)">
+				<rect id="Rectangle_70-2" x="2459.6" y="-1520.5" class="st0" width="8" height="6"/>
+				<rect id="Rectangle_72" x="2481.6" y="-1520.5" class="st0" width="8" height="6"/>
+			</g>
+		</g>
+		<g id="Body_car_2" transform="translate(-55)">
+			<rect class="st3" width="52" height="19"/>
+			<rect x="0.5" y="0.5" class="st4" width="51" height="18"/>
+		</g>
+	</g>
+	<g id="Car1">
+		<g id="wheels_car_1">
+			<path id="Path_12" class="st1" d="M1.6,17c-0.1-2.3,1.7-4.4,4-4.5c2.3,0.1,4.1,2.2,4,4.5c0.1,2.3-1.7,4.4-4,4.5
+				C3.2,21.4,1.4,19.4,1.6,17"/>
+			<g id="Ellipse_7_1_2" transform="translate(-2449 1533)">
+				<ellipse id="Ellipse_9-2" class="st1" cx="2463.6" cy="-1516" rx="4" ry="4.5"/>
+			</g>
+			<g id="Ellipse_6_1_2" transform="translate(-2440 1533)">
+				<circle id="Ellipse_10-2" class="st1" cx="2464.1" cy="-1516" r="4.5"/>
+			</g>
+			<g id="Ellipse_8_1_2" transform="translate(-2430 1533)">
+				<circle id="Ellipse_11-2" class="st1" cx="2464.1" cy="-1516" r="4.5"/>
+			</g>
+			<g id="Ellipse_5_1_2" transform="translate(-2420 1533)">
+				<ellipse id="Ellipse_12-2" class="st1" cx="2463.6" cy="-1516" rx="4" ry="4.5"/>
+			</g>
+		</g>
+		<g id="Body_car_1">
+			<rect x="0.3" y="0.4" class="st2" width="2.7" height="18.2"/>
+			<rect x="12.1" y="0.4" class="st2" width="2" height="18.2"/>
+			<rect x="23.1" y="0.4" class="st2" width="2" height="18.2"/>
+			<polygon class="st2" points="38,18.6 34.1,18.6 34.1,0.4 38,1 			"/>
+			<polygon class="st2" points="2.6,18.5 2.6,12 50.8,12 51.6,18.5 			"/>
+			<rect x="3" y="0.5" class="st2" width="31.7" height="4.5"/>
+			<polygon class="st2" points="42.6,5.6 37.8,5.4 37.8,1.4 42.4,2.4 47.5,6.9 50.9,12.2 46.9,12.2 46.4,9.1 			"/>
+			<path id="Path_13" class="st4" d="M0,0.5h34c9.7,0,17.5,7.9,17.5,17.5l0,0c0,0.2-0.2,0.4-0.4,0.5l0,0H0"/>
+			<line id="Line_34" class="st4" x1="0.5" y1="0" x2="0.5" y2="19"/>
+		</g>
+		<g id="Windows_car_1">
+			<g id="Rectangle_34_1_" transform="translate(-2434 1526)">
+				<rect id="Rectangle_68" x="2459.6" y="-1520.5" class="st0" width="8" height="6"/>
+			</g>
+			<g id="Rectangle_34_2_" transform="translate(-2434 1526)">
+				<path id="Rectangle_68_1_" class="st0" d="M2472.5-1520.5h2c3.3,0,6,2.7,6,6l0,0h-8V-1520.5z"/>
+			</g>
+			<g id="Rectangle_35_1_" transform="translate(-2445 1526)">
+				<rect id="Rectangle_69" x="2459.6" y="-1520.5" class="st0" width="8" height="6"/>
+			</g>
+			<g id="Rectangle_36_1_" transform="translate(-2456 1526)">
+				<rect id="Rectangle_70" x="2459.6" y="-1520.5" class="st0" width="8" height="6"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

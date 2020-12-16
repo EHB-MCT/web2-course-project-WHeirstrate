@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trailway</title>
     <link rel="stylesheet" href="./index.css">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+
 </head>
 
 <body>
@@ -13,18 +16,19 @@
         <div class="navigation_content">
             <a onclick="window.location.reload()"><img src="./images/Logo_Trailway_SVG.svg" alt="Logo Trailway"></a>
             <form id="form">
-                <input type="text" id="departureInput" class="locations" placeholder="Vertrekstation">
-                <input type="text" id="arrivalInput" class="locations" placeholder="Aankomststation"><br>
+                <input type="text" id="departureInput" class="locations" placeholder="Vertrekstation" value="oostende">
+                <input type="text" id="arrivalInput" class="locations" placeholder="Aankomststation" value="mechelen">
                 <div class="interests">
                     <p class="interessesText">Wat zijn jouw interesses?</p>
                     <hr class="line">
-                    <div class="checkboxes"><input type="checkbox" value="tourismebureaus" id="interest1">
+                    <div class="checkboxes"><input type="checkbox"
+                            value="accessibility/services-facilities/tourist-info-centers" id="interest1" class="prefs">
                         <label for="interest1">Tourismebureaus</label><br>
-                        <input type="checkbox" value="tourismebureaus" id="interest2">
+                        <input type="checkbox" value="tourist/accommodation/hotels" id="interest2" class="prefs">
                         <label for="interest2">Hotels</label><br>
-                        <input type="checkbox" value="tourismebureaus" id="interest3">
+                        <input type="checkbox" value="accessibility/reca/bars" id="interest3" class="prefs">
                         <label for="interest3">Cafés</label><br>
-                        <input type="checkbox" value="tourismebureaus" id="interest4">
+                        <input type="checkbox" value="accessibility/attractions/museum" id="interest4" class="prefs">
                         <label for="interest4">Musea</label>
                     </div>
                 </div>
@@ -35,54 +39,16 @@
 
     <div id="profile_element" class="profile_container_link"><img src="./images/User_SVG.svg" alt="Profiel icoon"></div>
 
+    </div>
+
     <div id="content" class="content">
-        <!-- <h1 class="title_quote">Het gaat niet om de bestemming, maar om de reis ernaartoe. Boeddha</h1>
+        <h1 class="title_quote">Het gaat niet om de bestemming, maar om de reis ernaartoe. Boeddha</h1>
         <p class="title_exp">Welkom, blij dat je er bent! Bij Trailway ben je aan het goede adres als je de steden wil
             verkennen waar je trein halt houdt. Geef je vertrekstation, aankomststation en interesses in en wij doen de
-            rest voor jou, zo simpel is het.</p> -->
-
-        <!--<div class="animation_container"></div> -->
-
-        <!-- <div class="stops_container">
-            <div class="stop_container" onclick="alert('div clicked')">
-                <img src="./images/Stad.jpg" alt="Stad Antwerpen">
-                <p class="time">Reistijd: 88u88</p>
-                <h3 class="stop_name">Antwerpen<h3>
-            </div>
-        </div> -->
-
-        <!--<div class="profile_container">
-            <p class="inleidingsTekst">Log je in om je favoriete steden en routes bij te houden, zodat je ze snel
-                terugvindt!</p>
-            <form class="profileLoginForm">
-                <input type="text" name="username" id="usernameInput" placeholder="E-mailadres">
-                <input type="password" name="password" id="passwordInput" placeholder="Wachtwoord"> <br>
-                <button type="submit">Log je in!</button>
-            </form>
-        </div>-->
-        <!-- <div class="profile_container">
-            <p class="usernameDisplay">Wouter Heirstrate</p>
-            <p class="emailDisplay">wouter.heirstrate@gmail.com</p>
-            <div class="scroll_container">
-                <p class="content_title"><span>Mijn routes</span></p>
-                <div class="inner_box">
-                    <div class="route_names">
-                        <p class="city_route_departure">Antwerpen</p>
-                        <img src="./images/arrow_SVG.svg" alt="arrow icon" class="arrow_icon">
-                        <p class="city_route_departure">Boom</p>
-                    </div>
-                </div>
-            </div>
-            <div class="scroll_container">
-                <p class="content_title"><span>Mijn steden</span></p>
-                <div class="inner_box">
-                    <div class="city_names">
-                        <p class="city_names_content">Amsterdam</p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+            rest voor jou, zo simpel is het.</p>
     </div>
 </body>
 
 </html>
+<script src="./index.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>

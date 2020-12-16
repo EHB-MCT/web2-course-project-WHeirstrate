@@ -145,7 +145,6 @@ body {
       grid-template-columns: repeat(9, 11.11111%);
   -ms-grid-rows: (20vh)[5];
       grid-template-rows: repeat(5, 20vh);
-  left: 380px;
   background-image: url("./images/Achtergrond_trein.jpg");
   background-repeat: no-repeat;
   background-size: 1250px;
@@ -167,12 +166,20 @@ body {
   background-color: #F1F1F1;
 }
 
+.logout {
+  top: 80px;
+}
+
 /*----------------------------------//
  Vanaf hier begint de dynamische css,
  die op elk moment verschillend is.
  De algemene css wordt bovenaan
  deze pagina beschreven.
 //----------------------------------*/
+.content {
+  position: relative;
+}
+
 .content .title_quote {
   color: white;
   text-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
@@ -218,9 +225,9 @@ body {
   height: 100%;
   width: 100%;
   background: url(./images/Treintje_animatie_SVG.svg) no-repeat;
-  z-index: -1;
-  -webkit-animation: 2s moving-background linear infinite;
-          animation: 2s moving-background linear infinite;
+  z-index: 0;
+  -webkit-animation: 1s moving-background linear infinite;
+          animation: 1s moving-background linear infinite;
 }
 
 @-webkit-keyframes moving-background {
@@ -416,5 +423,79 @@ body {
 .content .profile_container .scroll_container .inner_box .city_names .arrow_icon {
   width: 32px;
   margin-bottom: -10px;
+}
+
+.content .map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.content .mapCity,
+.content .mapBack {
+  position: absolute;
+  text-align: center;
+  z-index: 1;
+  right: 0;
+  left: 0;
+  margin: auto;
+  padding: 5px 25px;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+          box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+  border: 1px solid #00BAEA;
+  background-color: #ffffff;
+}
+
+.content .mapCity {
+  top: 25px;
+  width: 250px;
+}
+
+.content .mapBack {
+  bottom: 25px;
+  width: 200px;
+  border-width: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.content .marker_hotel,
+.content .marker_bar,
+.content .marker_museum,
+.content .marker_tourist {
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.content .marker_hotel {
+  background-image: url("./images/marker_hotel_SVG.svg");
+}
+
+.content .marker_bar {
+  background-image: url("./images/marker_bar_SVG.svg");
+}
+
+.content .marker_museum {
+  background-image: url("./images/marker_museum_SVG.svg");
+}
+
+.content .marker_tourist {
+  background-image: url("./images/marker_tourist_SVG.svg");
+}
+
+.content .mapboxgl-popup {
+  max-width: 200px;
+}
+
+.content .mapboxgl-popup-content {
+  text-align: center;
+  font-family: "Poppins", Arial, sans-serif;
 }
 /*# sourceMappingURL=index.css.map */

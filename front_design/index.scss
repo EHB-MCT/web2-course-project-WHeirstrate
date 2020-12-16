@@ -5,6 +5,7 @@ $font-title: "Segui UI";
 $main-color-blue: #00BAEA;
 $main-color-grey: #F1F1F1;
 $main-box-shadow: 0px 3px 6px rgba(0, 0, 34, 0.16);
+$main-border: 1px solid $main-color-blue;
 
 
 * {
@@ -54,7 +55,7 @@ body {
             height: 45px;
             background-color: #FFF;
             box-shadow: $main-box-shadow;
-            border: 1px solid $main-color-blue;
+            border: $main-border;
             border-radius: 10px;
             text-indent: 22%;
             font-size: 18px;
@@ -88,7 +89,7 @@ body {
             background-color: white;
             width: 76%;
             box-shadow: $main-box-shadow;
-            border: 1px solid $main-color-blue;
+            border: $main-border;
             border-radius: 10px;
             padding: 12px 0 7px;
             margin: 3.1vh auto 2.2vh;
@@ -119,7 +120,7 @@ body {
             height: 45px;
             background-color: #FFF;
             box-shadow: $main-box-shadow;
-            border: 1px solid $main-color-blue;
+            border: $main-border;
             border-radius: 10px;
             font-size: 18px;
             margin: 30px auto 20px;
@@ -136,7 +137,6 @@ body {
     display: grid;
     grid-template-columns: repeat(9, (100%/9));
     grid-template-rows: repeat(5, (100vh/5));
-    left: 380px;
     background-image: url('./images/Achtergrond_trein.jpg');
     background-repeat: no-repeat;
     background-size: 1250px;
@@ -156,6 +156,11 @@ body {
     border-radius: 15px;
     border: $main-color-blue solid 3px;
     background-color: $main-color-grey;
+
+}
+
+.logout {
+    top: 80px;
 }
 
 /*----------------------------------//
@@ -168,7 +173,7 @@ body {
 
 .content {
 
-
+    position: relative;
     // HOMEPAGE //
 
 
@@ -210,8 +215,8 @@ body {
         height: 100%;
         width: 100%;
         background: url(./images/Treintje_animatie_SVG.svg) no-repeat;
-        z-index: -1;
-        animation: 2s moving-background linear infinite;
+        z-index: 0;
+        animation: 1s moving-background linear infinite;
     }
 
     @keyframes moving-background {
@@ -297,7 +302,7 @@ body {
                 height: 45px;
                 background-color: #FFF;
                 box-shadow: $main-box-shadow;
-                border: 1px solid $main-color-blue;
+                border: $main-border;
                 border-radius: 10px;
                 text-indent: 30px;
                 font-size: 18px;
@@ -310,7 +315,7 @@ body {
                 height: 45px;
                 background-color: #FFF;
                 box-shadow: $main-box-shadow;
-                border: 1px solid $main-color-blue;
+                border: $main-border;
                 border-radius: 10px;
                 font-size: 18px;
                 margin: 40px 0 0 25%;
@@ -346,7 +351,7 @@ body {
                 margin-left: 10%;
                 margin-bottom: 30px;
                 padding-bottom: 5px;
-                border-bottom: 1px solid $main-color-blue;
+                border-bottom: $main-border;
 
                 span {
                     background-color: $main-color-grey;
@@ -383,5 +388,82 @@ body {
                 }
             }
         }
+    }
+
+    // MAP
+
+    .map {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .mapCity,
+    .mapBack {
+        position: absolute;
+        text-align: center;
+        z-index: 1;
+        right: 0;
+        left: 0;
+        margin: auto;
+        padding: 5px 25px;
+        border-radius: 15px;
+        box-shadow: $main-box-shadow;
+        border: $main-border;
+        background-color: #ffffff;
+    }
+
+    .mapCity {
+        top: 25px;
+        width: 250px;
+    }
+
+    .mapBack {
+        bottom: 25px;
+        width: 200px;
+        border-width: 3px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    // MARKER
+
+    .marker_hotel,
+    .marker_bar,
+    .marker_museum,
+    .marker_tourist {
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .marker_hotel {
+        background-image: url("./images/marker_hotel_SVG.svg");
+    }
+
+    .marker_bar {
+        background-image: url("./images/marker_bar_SVG.svg");
+    }
+
+    .marker_museum {
+        background-image: url("./images/marker_museum_SVG.svg");
+    }
+
+    .marker_tourist {
+        background-image: url("./images/marker_tourist_SVG.svg");
+    }
+
+    .mapboxgl-popup {
+        max-width: 200px;
+    }
+
+    .mapboxgl-popup-content {
+        text-align: center;
+        font-family: $font-to-use;
     }
 }

@@ -15,10 +15,24 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoid2hlaXJzdHJhdGUiLCJhIjoiY2tpbmptOWcwMDlqcTJ6b
 const contentElement = document.getElementById('content');
 const depInput = document.getElementById('departureInput');
 const arrInput = document.getElementById('arrivalInput');
+const profileElement = document.getElementById('profile_element');
 let prefList = [];
-document.getElementById('profile_element').addEventListener('click', () => {
+
+
+profileElement.addEventListener('click', () => {
 
     let previousHtmlString = contentElement.innerHTML;
+
+    renderProfile();
+
+    profileElement.addEventListener('click', () => {
+        //document.getElementById('logout_element').remove();
+        contentElement.innerHTML = previousHtmlString;
+        addEventListenersToGeneratedStops();
+    });
+});
+
+async function loginForm() {
 
     let htmlString = `
         <div class="profile_container">
@@ -34,45 +48,123 @@ document.getElementById('profile_element').addEventListener('click', () => {
     contentElement.innerHTML = htmlString;
 
 
-    document.getElementById('profileLoginForm').addEventListener('submit', loginForm);
+    document.getElementById('profileLoginForm').addEventListener('submit', async (e) => {
 
-    document.getElementById('profile_element').addEventListener('click', () => {
-        //document.getElementById('logout_element').remove();
-        contentElement.innerHTML = previousHtmlString;
-        addEventListenersToGeneratedStops();
+        e.preventDefault();
+
+        const usernameInput = document.getElementById('usernameInput');
+        const passwordInput = document.getElementById('passwordInput');
+        if (usernameInput.value !== "") {
+            if (passwordInput.value !== "") {
+
+                console.log("check", usernameInput.value, passwordInput.value);
+
+                const req = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: usernameInput.value,
+                        password: passwordInput.value
+                    })
+                });
+                const res = await req.json();
+                console.log(res.user);
+                if (!res.hasOwnProperty('token')) {
+                    alert(res.message);
+                } else {
+                    const user = res.user;
+                    localStorage.setItem('token', res.token);
+                    localStorage.setItem('userID', res.user._id);
+                    renderProfile();
+                }
+            } else
+                passwordInput.target;
+        } else
+            usernameInput.target;
     });
-});
+}
 
-function loginForm(e) {
-    e.preventDefault();
-    let htmlString = `
-        <div class="profile_container">
-            <p class="usernameDisplay">Wouter Heirstrate</p>
-            <p class="emailDisplay">wouter.heirstrate@gmail.com</p>
-            <div class="scroll_container">
-                <p class="content_title"><span>Mijn routes</span></p>
-                <div class="inner_box">
-                    <div class="route_names">
-                        <p class="city_route_departure">Antwerpen</p>
-                        <img src="./images/arrow_SVG.svg" alt="arrow icon" class="arrow_icon">
-                        <p class="city_route_departure">Boom</p>
-                    </div>
+async function getUser() {
+    const request = await fetch('http://localhost:3000/api/users/user', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+            userID: `${localStorage.getItem('userID')}`
+        })
+    });
+    const user = await request.json();
+    return user;
+}
+
+async function renderProfile() {
+
+    if (!localStorage.getItem('userID'))
+        loginForm();
+    else {
+        const user = await getUser();
+        console.log(user);
+        let htmlString = `
+            <div class="profile_container">
+                <p class="usernameDisplay">${user.name}</p>
+                <p class="emailDisplay">${user.email}</p>
+                <div class="scroll_container">
+                    <p class="content_title"><span>Mijn routes</span></p>
+                    <div class="inner_box" id="renderRoutesBox"></div>
                 </div>
-            </div>
-            <div class="scroll_container">
-                <p class="content_title"><span>Mijn steden</span></p>
-                <div class="inner_box">
-                    <div class="city_names">
-                        <p class="city_names_content">Amsterdam</p>
-                    </div>
+                <div class="scroll_container">
+                    <p class="content_title"><span>Mijn steden</span></p>
+                    <div class="inner_box" id="renderCitiesBox"></div>
                 </div>
-            </div>
-        </div>`;
+            </div>`;
+        contentElement.innerHTML = htmlString;
 
-    contentElement.innerHTML = htmlString;
+        // Render personalised routes
 
-    document.getElementById('profile_element').insertAdjacentHTML('afterend', `<div id="logout_element" class="profile_container_link logout"><img src="./images/logout_SVG.svg"
-    alt="Logout icoon">`);
+        let htmlRoutesString = "";
+        let depArrCount = 0;
+        for (let route of user.departure) {
+            htmlRoutesString += `
+            <div class="route_names">
+                <p class="city_route_departure">${route[depArrCount]}</p>
+                <img src="./images/arrow_SVG.svg" alt="arrow icon" class="arrow_icon">
+                <p class="city_route_departure">${user.arrival[depArrCount]}</p>
+            </div>`;
+            depArrCount++;
+        }
+        if (htmlRoutesString == "")
+            htmlRoutesString += `<p class="cityRoutesNotification">Zoek je routes op en like ze, zodat ze hier verschijnen tot je ze nodig hebt!</p>`;
+
+        document.getElementById('renderRoutesBox').innerHTML = htmlRoutesString;
+
+        // Render personalised cities
+
+        let htmlCitiesString = "";
+        for (let city of user.cities) {
+            htmlCitiesString += `
+                <div class="city_names">
+                    <p class="city_names_content">${city}</p>
+                </div>`;
+        }
+        if (htmlCitiesString == "")
+            htmlCitiesString += `<p class="cityRoutesNotification">Zoek in je routes naar je favoriete steden en sla ze hier op tot je ze weer wil bekijken!</p>`;
+
+        document.getElementById('renderCitiesBox').innerHTML = htmlCitiesString;
+
+        // Render logout icon and eventhandler
+
+        profileElement.insertAdjacentHTML('afterend', `<div id="logout_element" class="profile_container_link logout"><img src="./images/logout_SVG.svg"
+            alt="Logout icoon">`);
+        document.getElementById('logout_element').addEventListener('click', () => {
+            localStorage.removeItem('userID');
+            localStorage.removeItem('token');
+            window.location.reload();
+        });
+    }
 }
 
 function checkPrefs(e) {
@@ -113,11 +205,10 @@ async function getTrainData(dep, arr) {
 
     let stops = [{
         name: dep,
-        time: 0,
-        coords: []
+        time: 0
     }];
 
-    if (!longestRoute[1] !== 0) {
+    if (longestRoute[1] !== 0) {
         for (let stop of longestRoute[1].vias.via) {
             stops.push({
                 name: stop.station,
@@ -135,7 +226,13 @@ async function getTrainData(dep, arr) {
 }
 
 function generateStopsHtml(stops) {
-    let htmlString = `<div class="stops_container">`;
+    console.log(stops[0].name);
+    let htmlString = `
+    <div class="routeDisplay">
+        <input type="checkbox" class="likeRoute" id="route">
+        <label for="route">Route van ${stops[0].name} naar ${stops[stops.length-1].name}</label>
+    </div>
+    <div class="stops_container">`;
     for (let stop of stops) {
         const min = Math.floor(stop.time / 60) % 60;
         const hour = Math.floor(stop.time / 60 / 60) % 24;
@@ -150,6 +247,7 @@ function generateStopsHtml(stops) {
                 <img src="./images/Stad.jpg" alt="Stad Antwerpen">
                 <p class="time">Reistijd: ${hour + 'u' + min}</p>
                 <h3 class="stop_name">${stop.name}<h3>
+                <input type="checkbox" class="likeBox">
             </div>`;
     }
     htmlString += `</div>`;
@@ -158,25 +256,90 @@ function generateStopsHtml(stops) {
     addEventListenersToGeneratedStops();
 }
 
-function addEventListenersToGeneratedStops() {
+async function addEventListenersToGeneratedStops() {
+    let user = null;
+    if (localStorage.getItem('userID') !== null) {
+        user = await getUser();
+    }
+
+    const checkboxes = document.getElementsByClassName('likeBox');
+    if (user !== null) {
+        for (let city of user.cities) {
+            for (let checkbox of checkboxes) {
+                const checkBoxCity = checkbox.parentNode.parentNode.childNodes[5].innerText;
+                if (checkBoxCity == city)
+                    checkbox.checked = true;
+            }
+        }
+    }
+    for (let checkbox of checkboxes) {
+        checkbox.addEventListener('change', (e) => {
+            if (user == null)
+                profileElement.click();
+            else {
+                console.log(user)
+                checkCities();
+
+                function checkCities() {
+                    if (e.target.checked)
+                        user.cities.push(e.path[2].childNodes[5].innerText)
+                    else
+                        user.cities.splice(user.cities.indexOf(e.path[2].childNodes[5].innerText), 1);
+                }
+                console.log(user);
+                updateUser(user);
+            }
+        });
+    }
+
+
     const containers = document.getElementsByClassName('stop_container');
     for (let container of containers)
         container.addEventListener('click', getStopMap);
 }
 
-function getStopMap(e) {
-    let city = "";
-    if (e.target.className !== "stop_container")
-        city = e.path[1].childNodes[5].innerText;
-    else
-        city = e.path[0].childNodes[5].innerText;
-    console.log(city);
-    loadMap(city);
+async function updateUser(user) {
+    const req = await fetch('http://localhost:3000/api/users/update', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+            userID: `${localStorage.getItem('userID')}`,
+            departure: user.departure,
+            arrival: user.arrival,
+            cities: user.cities
+        })
+    })
+    const res = await req.json();
+    console.log(res)
 }
 
 
 
+
+
+
+
+
+
+
+
+
 // MAP //
+
+function getStopMap(e) {
+    let city = "";
+    if (e.target.className !== "likeBox") {
+        if (e.target.className !== "stop_container")
+            city = e.path[1].childNodes[5].innerText;
+        else
+            city = e.path[0].childNodes[5].innerText;
+        console.log(city);
+        loadMap(city);
+    }
+}
 
 async function loadMap(city) {
     htmlString = `
@@ -215,11 +378,11 @@ async function loadMap(city) {
         else if (filteredEl.properties.disc == "TOURIST_INFORMATION_CENTRE")
             htmlEl.className = 'marker_tourist';
         const popupHtml = `<h3>${filteredEl.properties.name}</h3><br><p>${filteredEl.properties.website}</p>`;
-        new mapboxgl.Popup().setHtml()
+        //new mapboxgl.Popup().setHtml()
         console.log(htmlEl);
         new mapboxgl.Marker(htmlEl)
             .setLngLat(filteredEl.geo.coords)
-            .setPopup()
+            //.setPopup()
             .addTo(map);
     }
 }

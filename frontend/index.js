@@ -18,6 +18,37 @@ const arrInput = document.getElementById('arrivalInput');
 const profileElement = document.getElementById('profile_element');
 let prefList = [];
 
+//--------------------------------------------------------------//
+//------------------------main-form-----------------------------//
+//--------------------------------------------------------------//
+
+function checkMainForm(dep, arr) {
+    if (dep !== "")
+        if (arr !== "") {
+            loadingAnimation();
+
+            getTrainData(capitalize(dep), capitalize(arr));
+        } else
+            arrInput.focus();
+    else
+        depInput.focus();
+}
+
+function checkPrefs(e) {
+    if (e.target.checked)
+        prefList.push(e.target.value);
+    else
+        prefList.splice(prefList.indexOf(e.target.value), 1);
+}
+
+function loadingAnimation() {
+    const htmlString = '<div class="animation_container"></div>';
+    contentElement.innerHTML = htmlString;
+}
+
+//--------------------------------------------------------------//
+//-------------------------profile------------------------------//
+//--------------------------------------------------------------//
 
 profileElement.addEventListener('click', () => {
 
@@ -30,6 +61,82 @@ profileElement.addEventListener('click', () => {
         addEventListenersToGeneratedStops();
     });
 });
+
+async function renderProfile() {
+    if (!localStorage.getItem('userID'))
+        loginForm();
+    else {
+        const user = await getUser();
+        let htmlString = `
+            <div class="profile_container">
+                <p class="usernameDisplay">${user.name}</p>
+                <p class="emailDisplay">${user.email}</p>
+                <div class="scroll_container">
+                    <p class="content_title"><span>Mijn routes</span></p>
+                    <div class="inner_box" id="renderRoutesBox"></div>
+                </div>
+                <div class="scroll_container">
+                    <p class="content_title"><span>Mijn steden</span></p>
+                    <div class="inner_box" id="renderCitiesBox"></div>
+                </div>
+            </div>`;
+        contentElement.innerHTML = htmlString;
+
+        // Render personalised routes
+
+        let htmlRoutesString = "";
+        let depArrCount = 0;
+        for (let route of user.departure) {
+            htmlRoutesString += `
+            <div class="route_names">
+                <p class="city_route_departure">${route}</p>
+                <img src="./images/arrow_SVG.svg" alt="arrow icon" class="arrow_icon">
+                <p class="city_route_departure">${user.arrival[depArrCount]}</p>
+            </div>`;
+            depArrCount++;
+        }
+        if (htmlRoutesString == "")
+            htmlRoutesString += `<p class="cityRoutesNotification">Zoek je routes op en like ze, zodat ze hier verschijnen tot je ze nodig hebt!</p>`;
+
+        document.getElementById('renderRoutesBox').innerHTML = htmlRoutesString;
+
+        for (let route of document.getElementsByClassName('route_names')) {
+            route.addEventListener('click', (e) => {
+                checkMainForm(route.childNodes[1].innerText, route.childNodes[5].innerText)
+            });
+        }
+
+        // Render personalised cities
+
+        let htmlCitiesString = "";
+        for (let city of user.cities) {
+            htmlCitiesString += `
+                <div class="city_names">
+                    <p class="city_names_content">${city}</p>
+                </div>`;
+        }
+        if (htmlCitiesString == "")
+            htmlCitiesString += `<p class="cityRoutesNotification">Zoek in je routes naar je favoriete steden en sla ze hier op tot je ze weer wil bekijken!</p>`;
+
+        document.getElementById('renderCitiesBox').innerHTML = htmlCitiesString;
+
+        for (let city of document.getElementsByClassName('city_names')) {
+            city.addEventListener('click', () => {
+                loadMap(city.childNodes[1].innerText);
+            });
+        }
+
+        // Render logout icon and eventhandler
+
+        profileElement.insertAdjacentHTML('afterend', `<div id="logout_element" class="profile_container_link logout"><img src="./images/logout_SVG.svg"
+            alt="Logout icoon">`);
+        document.getElementById('logout_element').addEventListener('click', () => {
+            localStorage.removeItem('userID');
+            localStorage.removeItem('token');
+            window.location.reload();
+        });
+    }
+}
 
 async function loginForm() {
 
@@ -133,104 +240,9 @@ async function createAndLinkUser(userName, userEmail, userPassword) {
     renderProfile();
 }
 
-async function renderProfile() {
-
-    if (!localStorage.getItem('userID'))
-        loginForm();
-    else {
-        const user = await getUser();
-        let htmlString = `
-            <div class="profile_container">
-                <p class="usernameDisplay">${user.name}</p>
-                <p class="emailDisplay">${user.email}</p>
-                <div class="scroll_container">
-                    <p class="content_title"><span>Mijn routes</span></p>
-                    <div class="inner_box" id="renderRoutesBox"></div>
-                </div>
-                <div class="scroll_container">
-                    <p class="content_title"><span>Mijn steden</span></p>
-                    <div class="inner_box" id="renderCitiesBox"></div>
-                </div>
-            </div>`;
-        contentElement.innerHTML = htmlString;
-
-        // Render personalised routes
-
-        let htmlRoutesString = "";
-        let depArrCount = 0;
-        for (let route of user.departure) {
-            htmlRoutesString += `
-            <div class="route_names">
-                <p class="city_route_departure">${route}</p>
-                <img src="./images/arrow_SVG.svg" alt="arrow icon" class="arrow_icon">
-                <p class="city_route_departure">${user.arrival[depArrCount]}</p>
-            </div>`;
-            depArrCount++;
-        }
-        if (htmlRoutesString == "")
-            htmlRoutesString += `<p class="cityRoutesNotification">Zoek je routes op en like ze, zodat ze hier verschijnen tot je ze nodig hebt!</p>`;
-
-        document.getElementById('renderRoutesBox').innerHTML = htmlRoutesString;
-
-        for (let route of document.getElementsByClassName('route_names')) {
-            route.addEventListener('click', (e) => {
-                checkMainForm(route.childNodes[1].innerText, route.childNodes[5].innerText)
-            });
-        }
-
-        // Render personalised cities
-
-        let htmlCitiesString = "";
-        for (let city of user.cities) {
-            htmlCitiesString += `
-                <div class="city_names">
-                    <p class="city_names_content">${city}</p>
-                </div>`;
-        }
-        if (htmlCitiesString == "")
-            htmlCitiesString += `<p class="cityRoutesNotification">Zoek in je routes naar je favoriete steden en sla ze hier op tot je ze weer wil bekijken!</p>`;
-
-        document.getElementById('renderCitiesBox').innerHTML = htmlCitiesString;
-
-        for (let city of document.getElementsByClassName('city_names')) {
-            city.addEventListener('click', () => {
-                loadMap(city.childNodes[1].innerText);
-            });
-        }
-
-        // Render logout icon and eventhandler
-
-        profileElement.insertAdjacentHTML('afterend', `<div id="logout_element" class="profile_container_link logout"><img src="./images/logout_SVG.svg"
-            alt="Logout icoon">`);
-        document.getElementById('logout_element').addEventListener('click', () => {
-            localStorage.removeItem('userID');
-            localStorage.removeItem('token');
-            window.location.reload();
-        });
-    }
-}
-
-function checkPrefs(e) {
-    if (e.target.checked)
-        prefList.push(e.target.value);
-    else
-        prefList.splice(prefList.indexOf(e.target.value), 1);
-}
-
-
-
-function checkMainForm(dep, arr) {
-    if (dep !== "")
-        if (arr !== "") {
-            loadingAnimation();
-
-            getTrainData(capitalize(dep), capitalize(arr));
-        } else
-            arrInput.focus();
-    else
-        depInput.focus();
-}
-
+//--------------------------------------------------------------//
+//------------------------train-data----------------------------//
+//--------------------------------------------------------------//
 
 async function getTrainData(dep, arr) {
     const req = await fetch(`https://api.irail.be/connections/?from=${dep}&to=${arr}&format=json&lang=en`);
@@ -359,6 +371,10 @@ async function addEventListenersToGeneratedStops() {
         container.addEventListener('click', getStopMap);
 }
 
+//--------------------------------------------------------------//
+//------------------------API-calls-----------------------------//
+//--------------------------------------------------------------//
+
 async function getUser() {
     const request = await fetch('http://localhost:3000/api/users/user', {
         method: 'post',
@@ -407,8 +423,6 @@ async function updateUser(user) {
     const res = await req.json();
 }
 
-// MAP //
-
 function getStopMap(e) {
     let city = "";
     if (e.target.className !== "likeBox") {
@@ -419,6 +433,10 @@ function getStopMap(e) {
         loadMap(city);
     }
 }
+
+//--------------------------------------------------------------//
+//--------------------------Mapbox------------------------------//
+//--------------------------------------------------------------//
 
 async function loadMap(city) {
     htmlString = `
@@ -468,9 +486,6 @@ function addEventListenersToMap(previousHtml) {
     });
 }
 
-
-//-------------------------------------------------------------------//
-//-------------------------------------------------------------------//
 async function prepareMarkerList(city) {
     let filteredList = [];
     if (prefList !== [])
@@ -500,16 +515,10 @@ async function prepareMarkerList(city) {
         }
     return filteredList;
 }
-//-------------------------------------------------------------------//
-//-------------------------------------------------------------------//
-//-------------------------------------------------------------------//
 
-
-function loadingAnimation() {
-    const htmlString = '<div class="animation_container"></div>';
-    contentElement.innerHTML = htmlString;
-}
-
+//--------------------------------------------------------------//
+//--------------------------other-------------------------------//
+//--------------------------------------------------------------//
 
 function capitalize(str) {
     return str[0].toUpperCase() + str.slice(1);

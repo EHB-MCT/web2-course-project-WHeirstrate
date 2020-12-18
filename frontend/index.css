@@ -348,16 +348,25 @@ body {
 
 .content .profile_container .inleidingsTekst {
   padding-top: 30px;
-  padding-bottom: 15px;
   font-size: 18px;
   margin: auto;
 }
 
-.content .profile_container .profileLoginForm {
+.content .profile_container .createAccount {
+  margin: auto;
+  padding-bottom: 30px;
+}
+
+.content .profile_container .createAccount a {
+  color: #00BAEA;
+  font-weight: bold;
+}
+
+.content .profile_container .profileForm {
   margin: 0 auto;
 }
 
-.content .profile_container .profileLoginForm input {
+.content .profile_container .profileForm input {
   width: 100%;
   height: 45px;
   background-color: #FFF;
@@ -367,11 +376,11 @@ body {
   border-radius: 10px;
   text-indent: 30px;
   font-size: 18px;
-  margin-bottom: 3.1vh;
+  margin-bottom: 23px;
   outline-color: #00BAEA;
 }
 
-.content .profile_container .profileLoginForm button {
+.content .profile_container .profileForm button {
   width: 50%;
   height: 45px;
   background-color: #FFF;
@@ -382,6 +391,15 @@ body {
   font-size: 18px;
   margin: 40px 0 0 25%;
   outline-color: #00BAEA;
+}
+
+.content .profile_container .signUp {
+  width: 50%;
+  margin-top: 20px;
+}
+
+.content .profile_container .signUp button {
+  margin-top: 15px;
 }
 
 .content .profile_container .usernameDisplay {
@@ -451,6 +469,11 @@ body {
 .content .profile_container .scroll_container .inner_box .city_names .arrow_icon {
   width: 32px;
   margin-bottom: -10px;
+}
+
+.content .profile_container .scroll_container .inner_box .route_names:hover,
+.content .profile_container .scroll_container .inner_box .city_names:hover {
+  cursor: pointer;
 }
 
 .content .profile_container .scroll_container .inner_box .cityRoutesNotification {

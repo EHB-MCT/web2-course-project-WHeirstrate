@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trailway</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", Arial, sans-serif;
+    }
+
+    body {
+        position: relative;
+        height: 100vh;
+    }
+
+    header {
+        text-align: center;
+        width: 100%;
+        height: 100px;
+        background-color: #00BAEA;
+        padding-top: 45px;
+    }
+
+    main {
+        margin: 30px auto;
+        width: 76%;
+    }
+
+
+    .line {
+        width: 70%;
+        margin: 30px auto;
+        border: 1px solid #00BAEA;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+    }
+
+    footer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 40px;
+        padding-top: 7px;
+        box-sizing: border-box;
+        margin: auto;
+        background-color: #00BAEA;
+
+        text-align: center;
+    }
+
+    .disclaimer {
+        font-size: 10px;
+    }
+</style>
+
+<body>
+    <header>
+        <h1>TRAILWAY</h1>
+    </header>
+    <main>
+        <h3>Dit is de sourcepagina (root) van de trailway applicatie. Net als op de <a
+                href="../../frontend/index.html">website</a> ben je hier
+            helemaal welkom. Bekijk hieronder wat je allemaal kan doen.</h3>
+        <hr class="line">
+
+        <p>Verveel je je of wil je eens kijken wat er te doen is in de steden en dorpen waar je trein halt houdt? Neem
+            dan zeker een kijkje op de web app!</p>
+        <li>Dat kan <a href="../../frontend/index.html">hier</a>.</li>
+        <p>Bekijk je liever de API zelf met alle gebruikers?</p>
+        <li>Dat kan <a href="/api/users" target="about_blank">hier</a>.</li>
+        <p>Wil je de opgeslagen routes bekijken van een bepaalde gebruiker?</p>
+        <li>Dat kan <a href="/api/users">hier</a>.</li>
+        <p class="disclaimer"><span style="color:red">Let op:</span> een gebruiker kan gezocht worden door <b>/id</b>
+            achter
+            de url plaatsen. Bijvoorbeeld
+            <b>/api/users/5fb1059540e4614b004e3091</b></p>
+
+
+    </main>
+    <footer>
+        <p>&#169 Wouter Heirstrate, student aan de <a href="https://www.erasmushogeschool.be"
+                target="about_blank">Erasmushogeschool
+                Brussel</a></p>
+    </footer>
+</body>
+
+</html>

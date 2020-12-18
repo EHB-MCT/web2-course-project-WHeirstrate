@@ -1,0 +1,21 @@
+Welcome to the Trailway documentation.
+
+This application is quite easy to use, to be honest
+
+ -- Type in your desired city of departure and arrival and the wesite will start calculating.
+ -- Log in at Trailway to save the cities and routes you like.
+     -- Like cities or specific routes by checking the box next to them.
+        -- Disclaimer: checkboxes aren't styled due to time running short
+        -- Disclaimer: you must be logged in to save routes or cities.
+        If you are not logged in but check a box, you will be redirected
+        to the login screen, from where you have the option to log in or
+        sign up.
+
+ -- Click on a city to load its map (https://www.mapbox.com/).
+ -- Set up your preferences before loading a map by checking the boxes in the search form.
+     -- Disclaimer: checkboxes aren't styled due to design reasons.
+
+Login Credentials (or sign up yourself)
+
+    E-mail: cssgod@mail.be
+    Wachtwoord: Web2020

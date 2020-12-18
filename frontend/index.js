@@ -26,7 +26,6 @@ profileElement.addEventListener('click', () => {
     renderProfile();
 
     profileElement.addEventListener('click', () => {
-        //document.getElementById('logout_element').remove();
         contentElement.innerHTML = previousHtmlString;
         addEventListenersToGeneratedStops();
     });
@@ -59,8 +58,6 @@ async function loginForm() {
         if (usernameInput.value !== "") {
             if (passwordInput.value !== "") {
 
-                console.log("check", usernameInput.value, passwordInput.value);
-
                 const req = await fetch('http://localhost:3000/api/login', {
                     method: 'POST',
                     headers: {
@@ -72,7 +69,6 @@ async function loginForm() {
                     })
                 });
                 const res = await req.json();
-                console.log(res.user);
                 if (!res.hasOwnProperty('token')) {
                     alert(res.message);
                 } else {
@@ -143,7 +139,6 @@ async function renderProfile() {
         loginForm();
     else {
         const user = await getUser();
-        console.log(user);
         let htmlString = `
             <div class="profile_container">
                 <p class="usernameDisplay">${user.name}</p>
@@ -199,7 +194,6 @@ async function renderProfile() {
 
         for (let city of document.getElementsByClassName('city_names')) {
             city.addEventListener('click', () => {
-                console.log(city.childNodes[1].innerText);
                 loadMap(city.childNodes[1].innerText);
             });
         }
@@ -228,9 +222,6 @@ function checkPrefs(e) {
 function checkMainForm(dep, arr) {
     if (dep !== "")
         if (arr !== "") {
-            console.log('Departure:', dep);
-            console.log('Arrival:', arr);
-
             loadingAnimation();
 
             getTrainData(capitalize(dep), capitalize(arr));
@@ -275,7 +266,6 @@ async function getTrainData(dep, arr) {
 }
 
 function generateStopsHtml(stops) {
-    console.log(stops[0].name);
     let htmlString = `
     <div class="routeDisplay">
         <input type="checkbox" class="likeRoute" id="route">
@@ -352,7 +342,6 @@ async function addEventListenersToGeneratedStops() {
             if (user == null)
                 profileElement.click();
             else {
-                console.log(user)
                 checkCities();
 
                 function checkCities() {
@@ -361,7 +350,6 @@ async function addEventListenersToGeneratedStops() {
                     else
                         user.cities.splice(user.cities.indexOf(e.path[2].childNodes[5].innerText), 1);
                 }
-                console.log(user);
                 updateUser(user);
             }
         });
@@ -417,19 +405,7 @@ async function updateUser(user) {
         })
     })
     const res = await req.json();
-    console.log(res)
 }
-
-
-
-
-
-
-
-
-
-
-
 
 // MAP //
 
@@ -440,7 +416,6 @@ function getStopMap(e) {
             city = e.path[1].childNodes[5].innerText;
         else
             city = e.path[0].childNodes[5].innerText;
-        console.log(city);
         loadMap(city);
     }
 }
@@ -459,7 +434,6 @@ async function loadMap(city) {
     const data = await res.json();
     const coords = data.features[0].geometry.coordinates;
     const parsedCityName = data.features[0].place_name.split(",", 1)[0];
-    console.log(parsedCityName);
 
     let map = new mapboxgl.Map({
         container: 'map',
@@ -469,7 +443,6 @@ async function loadMap(city) {
     });
 
     const filteredList = await prepareMarkerList(parsedCityName);
-    console.log(filteredList);
 
     for (let filteredEl of filteredList) {
         const htmlEl = document.createElement('div');
@@ -481,12 +454,8 @@ async function loadMap(city) {
             htmlEl.className = 'marker_museum';
         else if (filteredEl.properties.disc == "TOURIST_INFORMATION_CENTRE")
             htmlEl.className = 'marker_tourist';
-        const popupHtml = `<h3>${filteredEl.properties.name}</h3><br><p>${filteredEl.properties.website}</p>`;
-        //new mapboxgl.Popup().setHtml()
-        console.log(htmlEl);
         new mapboxgl.Marker(htmlEl)
             .setLngLat(filteredEl.geo.coords)
-            //.setPopup()
             .addTo(map);
     }
 }

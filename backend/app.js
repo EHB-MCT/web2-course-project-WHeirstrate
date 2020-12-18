@@ -11,6 +11,16 @@ const port = (process.env.PORT || 3000);
 const userRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
 
+// Middleware
+
+const cors = require('cors');
+app.use(cors());
+const bodyparser = require('body-parser');
+app.use(bodyparser.urlencoded({
+    extended: true
+}));
+app.use(bodyparser.json());
+
 // Mongoose database
 
 const db_name = "final_project";
@@ -18,15 +28,6 @@ mongoose.connect(`mongodb+srv://admin:admin@cluster0.en9gr.mongodb.net/${db_name
     useNewUrlParser: true
 });
 
-// Middleware
-
-const cors = require('cors');
-const bodyparser = require('body-parser');
-app.use(bodyparser.urlencoded({
-    extended: true
-}));
-app.use(bodyparser.json());
-app.use(cors());
 
 // CRUD opperations
 

@@ -5,8 +5,8 @@ This application is quite easy to use, to be honest
  -- Type in your desired city of departure and arrival and the wesite will start calculating.
      -- Disclaimer: becauls of the way iRail works, some cities will have to be
         entered correctly, or they will simply not work and the site will crash.
-        Example: 'Brussel', 'brussel', 'bruxelles-midi' or 'brussel-zuid' will return
-        an error, whereas 'bruxelles-Midi' or 'Bruxelles-Midi' will work as intended.
+        Example: 'bruxelles-midi' or 'brussel-zuid' will return
+        an error, whereas 'bruxelles' or 'Brussel' will work as intended.
         There is nothing I could do to prevent this from happening. 
  -- Log in at Trailway to save the cities and routes you like.
      -- Like cities or specific routes by checking the box next to them.

@@ -39,7 +39,7 @@ app.use('/api/users', userRoute);
 
 
 app.listen(port, () => {
-    console.log(`\nExample app listening at http://localhost:${port}`);
+    console.log(`\nExample app listening at ${__dirname}`);
     db = mongoose.connection;
     db.on('error', () => console.error('Connection to database failed'));
     db.once('open', () => console.log(`\n-- SERVER -- Connected to database ${db_name}!`));

@@ -12,7 +12,10 @@ const register = (req, res, next) => {
         let user = new User({
             name: req.body.name,
             email: req.body.email,
-            password: hashedPass
+            password: hashedPass,
+            departure: [],
+            arrival: [],
+            cities: []
         });
 
         user.save()
@@ -23,7 +26,7 @@ const register = (req, res, next) => {
             })
             .catch(err => {
                 res.json({
-                    message: 'An error occured!'
+                    message: `An error occured: ${err}`
                 });
             });
     });
@@ -32,7 +35,7 @@ const register = (req, res, next) => {
 
 const login = (req, res, next) => {
     let username = req.body.username;
-    let password = res.body.password;
+    let password = req.body.password;
 
     User.findOne({
             $or: [{
@@ -50,22 +53,26 @@ const login = (req, res, next) => {
                     if (result) {
                         let token = jwt.sign({
                             name: user.name
-                        }, 'verySecretValue', {
+                        }, 'AnA.R0s()', { // secret value to confirm -> has to be the same as authenticate.js secret value
                             expiresIn: '1h'
                         });
+                        console.log(result);
                         res.json({
                             message: 'Login Successful!',
-                            token
+                            token,
+                            user
                         });
                     } else {
                         res.json({
-                            message: 'Password does not match!'
+                            message: 'Password does not match!',
+                            error: 'failed'
                         });
                     }
                 })
             } else {
                 res.json({
-                    message: 'No user found!'
+                    message: 'No user found!',
+                    error: 'failed'
                 });
             }
         })

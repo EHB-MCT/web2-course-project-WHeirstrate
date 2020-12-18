@@ -10,6 +10,16 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String
+    },
+
+    departure: {
+        type: Array
+    },
+    arrival: {
+        type: Array
+    },
+    cities: {
+        type: Array
     }
 }, {
     timestamps: true

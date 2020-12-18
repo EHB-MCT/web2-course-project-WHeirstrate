@@ -165,7 +165,7 @@ async function loginForm() {
         if (usernameInput.value !== "") {
             if (passwordInput.value !== "") {
 
-                const req = await fetch('https://web2-trailway-frontend.herokuapp.com/api/login', {
+                const req = await fetch('https://web2-trailway-api.herokuapp.com/api/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -376,7 +376,7 @@ async function addEventListenersToGeneratedStops() {
 //--------------------------------------------------------------//
 
 async function getUser() {
-    const request = await fetch('https://web2-trailway-frontend.herokuapp.com/api/users/user', {
+    const request = await fetch('https://web2-trailway-api.herokuapp.com/api/users/user', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
@@ -391,7 +391,7 @@ async function getUser() {
 }
 
 async function createUser(userName, userEmail, userPassword) {
-    const req = await fetch('https://web2-trailway-frontend.herokuapp.com/api/register', {
+    const req = await fetch('https://web2-trailway-api.herokuapp.com/api/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -407,7 +407,7 @@ async function createUser(userName, userEmail, userPassword) {
 }
 
 async function updateUser(user) {
-    const req = await fetch('https://web2-trailway-frontend.herokuapp.com/api/users/update', {
+    const req = await fetch('https://web2-trailway-api.herokuapp.com/api/users/update', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',

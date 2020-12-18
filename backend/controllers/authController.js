@@ -21,12 +21,14 @@ const register = (req, res, next) => {
         user.save()
             .then(user => {
                 res.json({
-                    message: 'User Added Succesfully!'
+                    message: 'User Added Succesfully!',
+                    user
                 });
             })
             .catch(err => {
                 res.json({
-                    message: `An error occured: ${err}`
+                    message: `An error occured!`,
+                    err
                 });
             });
     });

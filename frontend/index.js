@@ -3,7 +3,7 @@ window.onload = function () {
 
     document.getElementById('form').addEventListener('submit', (e) => {
         e.preventDefault();
-        checkMainForm();
+        checkMainForm(depInput.value, arrInput.value);
     });
 
     for (let pref of document.getElementsByClassName('prefs')) {
@@ -38,15 +38,17 @@ async function loginForm() {
         <div class="profile_container">
             <p class="inleidingsTekst">Log je in om je favoriete steden en routes bij te houden, zodat je ze snel
                 terugvindt!</p>
-            <form class="profileLoginForm" id="profileLoginForm">
+            <p class="createAccount">Nog geen account? Maak er dan <a href="" id="createAccountLink">hier</a> een aan!</p>
+            <form class="profileForm" id="profileLoginForm">
                 <input type="text" name="username" id="usernameInput" placeholder="E-mailadres">
-                <input type="password" name="password" id="passwordInput" placeholder="Wachtwoord"> <br>
+                <input type="password" name="password" id="passwordInput" placeholder="Wachtwoord">
                 <button type="submit">Log je in!</button>
             </form>
         </div>`;
 
     contentElement.innerHTML = htmlString;
 
+    document.getElementById('createAccountLink').addEventListener('click', makeAndPushUserForm);
 
     document.getElementById('profileLoginForm').addEventListener('submit', async (e) => {
 
@@ -80,25 +82,59 @@ async function loginForm() {
                     renderProfile();
                 }
             } else
-                passwordInput.target;
+                passwordInput.focus();
         } else
-            usernameInput.target;
+            usernameInput.focus();
     });
 }
 
-async function getUser() {
-    const request = await fetch('http://localhost:3000/api/users/user', {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-            authorization: localStorage.getItem('token')
-        },
-        body: JSON.stringify({
-            userID: `${localStorage.getItem('userID')}`
-        })
+function makeAndPushUserForm(e) {
+    e.preventDefault();
+    let htmlString = `
+    <div class="profile_container">
+        <p class="inleidingsTekst"> Maak nu je account aan om je favoriete steden en routes op te slaan!</p>
+        <form class="profileForm signUp" id="createUser">
+            <input type="text" placeholder="Naam" id="createAccountName">
+            <input type="email" placeholder="Email adres" id="createAccountEmail">
+            <input type="password" placeholder="Wachtwoord" id="createAccountPassword">
+            <input type="password" placeholder="Bevestig wachtwoord" id="createAccountPasswordCheck">
+            <button type="submit">Meld je aan!</button>
+        </form>
+    </div>`;
+    contentElement.innerHTML = htmlString;
+
+    document.getElementById('createUser').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const userName = document.getElementById('createAccountName');
+        const userEmail = document.getElementById('createAccountEmail');
+        const userPassword = document.getElementById('createAccountPassword');
+        const userPasswordCheck = document.getElementById('createAccountPasswordCheck');
+
+        if (userName.value !== "") {
+            if (userEmail.value !== "") {
+                if (userPassword.value !== "") {
+                    if (userPasswordCheck.value !== userPassword.value) {
+                        userPasswordCheck.value = "";
+                        userPasswordCheck.focus();
+                    } else {
+                        createAndLinkUser(userName.value, userEmail.value, userPasswordCheck.value);
+                    }
+                } else
+                    userPassword.focus();
+            } else
+                userEmail.focus();
+        } else
+            userName.focus();
+
     });
-    const user = await request.json();
-    return user;
+}
+
+async function createAndLinkUser(userName, userEmail, userPassword) {
+    const user = await createUser(userName, userEmail, userPassword);
+    localStorage.setItem('userID', user._id);
+    localStorage.setItem('token', user.token);
+    renderProfile();
 }
 
 async function renderProfile() {
@@ -130,7 +166,7 @@ async function renderProfile() {
         for (let route of user.departure) {
             htmlRoutesString += `
             <div class="route_names">
-                <p class="city_route_departure">${route[depArrCount]}</p>
+                <p class="city_route_departure">${route}</p>
                 <img src="./images/arrow_SVG.svg" alt="arrow icon" class="arrow_icon">
                 <p class="city_route_departure">${user.arrival[depArrCount]}</p>
             </div>`;
@@ -140,6 +176,12 @@ async function renderProfile() {
             htmlRoutesString += `<p class="cityRoutesNotification">Zoek je routes op en like ze, zodat ze hier verschijnen tot je ze nodig hebt!</p>`;
 
         document.getElementById('renderRoutesBox').innerHTML = htmlRoutesString;
+
+        for (let route of document.getElementsByClassName('route_names')) {
+            route.addEventListener('click', (e) => {
+                checkMainForm(route.childNodes[1].innerText, route.childNodes[5].innerText)
+            });
+        }
 
         // Render personalised cities
 
@@ -154,6 +196,13 @@ async function renderProfile() {
             htmlCitiesString += `<p class="cityRoutesNotification">Zoek in je routes naar je favoriete steden en sla ze hier op tot je ze weer wil bekijken!</p>`;
 
         document.getElementById('renderCitiesBox').innerHTML = htmlCitiesString;
+
+        for (let city of document.getElementsByClassName('city_names')) {
+            city.addEventListener('click', () => {
+                console.log(city.childNodes[1].innerText);
+                loadMap(city.childNodes[1].innerText);
+            });
+        }
 
         // Render logout icon and eventhandler
 
@@ -176,15 +225,15 @@ function checkPrefs(e) {
 
 
 
-function checkMainForm() {
-    if (depInput.value !== "")
-        if (arrInput.value !== "") {
-            console.log('Departure:', depInput.value);
-            console.log('Arrival:', arrInput.value);
+function checkMainForm(dep, arr) {
+    if (dep !== "")
+        if (arr !== "") {
+            console.log('Departure:', dep);
+            console.log('Arrival:', arr);
 
             loadingAnimation();
 
-            getTrainData(capitalize(depInput.value), capitalize(arrInput.value));
+            getTrainData(capitalize(dep), capitalize(arr));
         } else
             arrInput.focus();
     else
@@ -230,9 +279,10 @@ function generateStopsHtml(stops) {
     let htmlString = `
     <div class="routeDisplay">
         <input type="checkbox" class="likeRoute" id="route">
-        <label for="route">Route van ${stops[0].name} naar ${stops[stops.length-1].name}</label>
+        <label for="route">Route van <span id="depRoute">${stops[0].name}</span> naar <span id=arrRoute>${stops[stops.length-1].name}</span></label>
     </div>
     <div class="stops_container">`;
+
     for (let stop of stops) {
         const min = Math.floor(stop.time / 60) % 60;
         const hour = Math.floor(stop.time / 60 / 60) % 24;
@@ -261,6 +311,31 @@ async function addEventListenersToGeneratedStops() {
     if (localStorage.getItem('userID') !== null) {
         user = await getUser();
     }
+
+    const departure = document.getElementById('depRoute').innerText;
+    const arrival = document.getElementById('arrRoute').innerText;
+
+    if (user !== null) {
+        for (let userDep of user.departure)
+            for (let userArr of user.arrival)
+                if (userDep == departure && userArr == arrival)
+                    document.getElementById('route').checked = true;
+
+    }
+
+    document.getElementById('route').addEventListener('change', (e) => {
+        if (user !== null) {
+            if (e.target.checked) {
+                user.departure.push(departure)
+                user.arrival.push(arrival)
+            } else {
+                user.departure.splice(user.departure.indexOf(departure, 1))
+                user.arrival.splice(user.arrival.indexOf(arrival, 1))
+            }
+            updateUser(user);
+        } else
+            profileElement.click();
+    })
 
     const checkboxes = document.getElementsByClassName('likeBox');
     if (user !== null) {
@@ -291,11 +366,40 @@ async function addEventListenersToGeneratedStops() {
             }
         });
     }
-
-
     const containers = document.getElementsByClassName('stop_container');
     for (let container of containers)
         container.addEventListener('click', getStopMap);
+}
+
+async function getUser() {
+    const request = await fetch('http://localhost:3000/api/users/user', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+            userID: `${localStorage.getItem('userID')}`
+        })
+    });
+    const user = await request.json();
+    return user;
+}
+
+async function createUser(userName, userEmail, userPassword) {
+    const req = await fetch('http://localhost:3000/api/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            name: userName,
+            email: userEmail,
+            password: userPassword
+        })
+    });
+    const res = await req.json();
+    return res.user;
 }
 
 async function updateUser(user) {
